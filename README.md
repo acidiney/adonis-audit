@@ -10,7 +10,7 @@ This is just a release for using it through NPM. Not claiming any rights over th
 Install npm module:
 
 ```bash
-$ adonis install adonis-audit
+$ adonis install adonis-mongo-audit
 ```
 
 ## Register provider
@@ -69,17 +69,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ## Changelog
-- v2.0.2
-  - Fixed bugs for AdonisJS 4.1.
-  
-- v2.0.1
-  - Removed need to pass in `ctx` parameters.
-  - Update README and instructions.md files.
-
-- v2.0.0
-  - Removed ctx injection on boot. `ctx` parameters need to be passed in manually now.
-  - Updated README to reflect new changes.
-  - Added this changelog.
-
-- v1.0.1
+- v1.0.0
   - Initial release.
