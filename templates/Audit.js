@@ -1,67 +1,14 @@
 "use strict";
+const mongoose = require('mongoose');
 
-const Model = use("Model");
-
-class Audit extends Model {
-  /**
-   * @returns {null}
-   */
-  static get updatedAtColumn () {
-    return null;
-  }
-
-  /**
-   * Auditable events
-   *
-   * @returns {Object}
-   */
-  static get events () {
-    return Object.freeze({
-      CREATE: "create",
-      UPDATE: "update",
-      DELETE: "delete",
-    });
-  }
-
-  /**
-   * @param value
-   * @returns {any}
-   */
-  getOldData (value) {
-    if (value) {
-      return JSON.parse(value);
-    }
-  }
-
-  /**
-   * @param value
-   * @returns {any}
-   */
-  setOldData (value) {
-    if (value !== null) {
-      return JSON.stringify(value);
-    }
-  }
-
-  /**
-   * @param value
-   * @returns {any}
-   */
-  getNewData (value) {
-    if (value) {
-      return JSON.parse(value);
-    }
-  }
-
-  /**
-   * @param value
-   * @returns {any}
-   */
-  setNewData (value) {
-    if (value !== null) {
-      return JSON.stringify(value);
-    }
-  }
-}
-
-module.exports = Audit;
+module.exports = mongoose.model('Log', {
+  "user": Object,
+  "event": String,
+  "auditable_id": Number,
+  "auditable": Object,
+  "ip": String,
+  "url": String,
+  "old_data": Object,
+  "new_data": Object,
+  "created_at": Date
+});

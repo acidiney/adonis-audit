@@ -3,7 +3,6 @@ const { ServiceProvider } = require("@adonisjs/fold");
 class AuditProvider extends ServiceProvider {
   register () {
     this.app.singleton("Adonis/Traits/Auditable", () => {
-      // const Config = this.app.use('Adonis/Src/Config')
       const Auditable = require("../src/Traits/Auditable");
       return new Auditable();
     });

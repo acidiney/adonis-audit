@@ -4,7 +4,7 @@ Start by registering the provider inside `start/app.js` file.
 
 ```js
 const providers = [
-  'adonis-audit/providers/AuditProvider'
+  'adonis-audit-mongo/providers/AuditProvider'
 ]
 ```
 
@@ -33,3 +33,7 @@ await MyModel.audit().update(/** model data **/)
 // delete
 await MyModel.audit().delete()
 ```
+
+### env
+
+SET IN YOUR ENV `MONGODB_URL`

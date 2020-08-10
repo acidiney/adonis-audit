@@ -1,7 +1,10 @@
 "use strict";
-
+const Env = use('Env')
 const _ = require("lodash");
-const Audit = use("App/Models/Audit");
+const mongoose = require('mongoose')
+const AuditScheme = use("App/Models/Audit")
+
+mongoose.connect(Env.get('MONGODB_URL'), { useNewUrlParser: true, useUnifiedTopology: true })
 
 class Auditable {
   register (Model) {
@@ -37,7 +40,7 @@ function createWithAudit ({ request, auth }) {
     const auditable = newModel.constructor.name;
     const auditableId = newModel.id
     const newData = _.omit(newModel.$attributes, this.$hidden);
-    const event = Audit.events.CREATE;
+    const event = 'CREATE';
 
 
     // save audit
@@ -75,7 +78,7 @@ function updateWithAudit ({ request, auth }) {
     }
 
     // update / patch are shared
-    const event = Audit.events.UPDATE;
+    const event = 'UPDATE';
 
     // save audit
     await createAudit(event, { request, auth }, auditable, auditableId, oldData,
@@ -100,7 +103,7 @@ function deleteWithAudit ({ request, auth }) {
     const result = await this.delete();
 
     // save audit
-    await createAudit(Audit.events.DELETE, { request, auth }, auditable,
+    await createAudit('DELETE', { request, auth }, auditable,
       auditableId, oldData);
 
     return result;
@@ -126,22 +129,29 @@ async function createAudit (
     throw new Error("Request param is empty");
   }
 
+
   // get user data to store
-  const userId = _.get(auth, "user.id", null);
+  const user = await auth.getUser()
   const url = request.originalUrl();
   const ip = request.ip();
 
   // save audit
-  await Audit.create({
-    user_id: userId,
-    auditable_id: auditableId,
-    auditable,
-    event,
-    url,
-    ip,
-    old_data: oldData,
-    new_data: newData,
-  });
+  const Audit = new AuditScheme(
+    {
+      user: typeof user !== undefined ? await user.toJSON() : user,
+      auditable_id: auditableId,
+      auditable,
+      event,
+      url,
+      ip,
+      old_data: oldData,
+      new_data: newData,
+      created_at: new Date()
+    }
+  );
+
+  await Audit.save();
+  // await mongoose.disconnect()
 }
 
 module.exports = Auditable;

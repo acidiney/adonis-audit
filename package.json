@@ -1,27 +1,28 @@
 {
-  "name": "adonis-audit",
+  "name": "adonis-audit-mongo",
   "version": "2.0.3",
-  "description": "Audit AdonisJS models",
+  "description": "Audit AdonisJS models with mongodb",
   "main": " ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahtinurme/adonis-audit.git"
+    "url": "git+https://github.com/acidiney/adonis-audit-mongo"
   },
   "keywords": [
     "adonis",
     "auditable",
     "adonis-auditable"
   ],
-  "author": "Simon Tong <simon@projectplanet.io>",
+  "author": "Acidiney Dias <hello@acidineydias.me>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahtinurme/adonis-audit/issues"
+    "url": "https://github.com/acidiney/adonis-audit-mongo/issues"
   },
-  "homepage": "https://github.com/ahtinurme/adonis-audit#readme",
+  "homepage": "https://github.com/acidiney/adonis-audit-mongo#readme",
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "mongoose": "^5.9.28"
   }
 }
