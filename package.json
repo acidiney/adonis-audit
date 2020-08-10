@@ -1,6 +1,6 @@
 {
   "name": "adonis-mongo-audit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Audit AdonisJS models with mongodb",
   "main": " ",
   "scripts": {

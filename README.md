@@ -19,7 +19,7 @@ Once you have installed adonis-audit, make sure to register the provider inside 
 
 ```js
 const providers = [
-  'adonis-audit/providers/AuditProvider'
+  'adonis-mongo-audit/providers/AuditProvider'
 ]
 ```
 
